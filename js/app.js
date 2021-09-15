@@ -253,7 +253,7 @@ const showProducts = (products) => {
     const div = document.createElement("div");
     div.classList.add("col");
     div.innerHTML = `
-      <div class="card bg-light border-light h-100 text-center py-3 single-product" style="width: 22rem;">
+      <div class="card border-light h-100 text-center py-3 single-product" style="width: 22rem; background-color: #f7f7f9">
         <img src="${image}" class="card-img-top product-image d-block mx-auto" alt="...">
         <div class="card-body">          
           <h3 class="card-title">${product.title}</h3>
@@ -263,7 +263,7 @@ const showProducts = (products) => {
           <h2>Price: ${product.price}</h2>
           <p>Rating: <span class="fw-bold">${product.rating.rate}</span> || ${product.rating.count} Ratings</p>
           <button onclick="addToCart(${product.id},${product.price})" class="btn btn-outline-success">Add to Cart</button>
-          <button onclick="showDetail()" class="btn btn-outline-danger">Details</button>
+          <button class="btn btn-outline-danger">Details</button>
         </div>
       </div>
     `;
@@ -278,7 +278,7 @@ let count = 0;
 const addToCart = (id, price) => {
   count = count + 1;
   totalProducts.innerText = count;
-  
+
   // updating all the prices 
   updatePrice("price", price);
   updateTaxAndCharge();
@@ -329,11 +329,5 @@ const updateTotal = () => {
     getInputValue("total-tax");
   totalPrice.innerText = grandTotal.toFixed(2);
 };
-
-// show details of the product onclick 
-function showDetail() {
-  
-} 
-
 
 loadProducts();
