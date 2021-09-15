@@ -253,7 +253,7 @@ const showProducts = (products) => {
     const div = document.createElement("div");
     div.classList.add("col");
     div.innerHTML = `
-      <div class="card text-center py-3 single-product">
+      <div class="card bg-light border-light h-100 text-center py-3 single-product" style="width: 22rem;">
         <img src="${image}" class="card-img-top product-image d-block mx-auto" alt="...">
         <div class="card-body">          
           <h3 class="card-title">${product.title}</h3>
@@ -261,8 +261,9 @@ const showProducts = (products) => {
         </div>
         <div>
           <h2>Price: ${product.price}</h2>
-          <button onclick="addToCart(${product.id},${product.price})" class="btn btn-success">Add to Cart</button>
-          <button class="btn btn-danger">Details</button>
+          <p>Rating: <span class="fw-bold">${product.rating.rate}</span> || ${product.rating.count} Ratings</p>
+          <button onclick="addToCart(${product.id},${product.price})" class="btn btn-outline-success">Add to Cart</button>
+          <button onclick="showDetail()" class="btn btn-outline-danger">Details</button>
         </div>
       </div>
     `;
@@ -276,11 +277,11 @@ const totalPrice = document.getElementById("total");
 let count = 0;
 const addToCart = (id, price) => {
   count = count + 1;
-  updatePrice("price", price);
-
-  updateTaxAndCharge();
   totalProducts.innerText = count;
-
+  
+  // updating all the prices 
+  updatePrice("price", price);
+  updateTaxAndCharge();
   updateTotal();
 };
 
@@ -323,9 +324,16 @@ const updateTaxAndCharge = () => {
 //grandTotal update function
 const updateTotal = () => {
   const grandTotal =
-    getInputValue("price") + getInputValue("delivery-charge") +
+    getInputValue("price") +
+    getInputValue("delivery-charge") +
     getInputValue("total-tax");
-    totalPrice.innerText = grandTotal;
+  totalPrice.innerText = grandTotal.toFixed(2);
 };
+
+// show details of the product onclick 
+function showDetail() {
+  
+} 
+
 
 loadProducts();
